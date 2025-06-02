@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import { useState } from "react";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
+import EmojiPicker from "@/components/EmojiPicker";
 
 const PlaceholderImage = require("@/assets/images/sunset.jpg");
 
@@ -13,6 +14,7 @@ export default function Index() {
     undefined,
   );
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,11 +36,15 @@ export default function Index() {
   };
 
   const onAddSticker = () => {
-    // TODO
+    setIsModalVisible(true);
+  };
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
   };
 
   const onSaveImageAsync = () => {
-    // TODO
+    // we will implement later
   };
 
   return (
@@ -74,6 +80,9 @@ export default function Index() {
           />
         </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        {/* A List of emoji component will go here */}
+      </EmojiPicker>
     </View>
   );
 }
